@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { uploadPhoto, createUser } from './utils';
 
-async function asyncUploadUser() {
+export async function asyncUploadUser() {
   try {
     const photo = await uploadPhoto();
     const user = await createUser();

@@ -2,7 +2,7 @@
 import signUpUser from './4-user-promise';
 import { uploadPhoto } from './utils';
 
-function handleProfileSignup(firstName, lastName, fileName) {
+export default function handleProfileSignup(firstName, lastName, fileName) {
   const promisesList = [signUpUser(firstName, lastName), uploadPhoto(fileName)];
 
   return Promise.allSettled(promisesList)

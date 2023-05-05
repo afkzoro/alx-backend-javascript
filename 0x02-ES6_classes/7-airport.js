@@ -6,7 +6,7 @@ export default class Airport {
   }
 
   get name() {
-    return this._name;
+   return `Airport [${this._code}] { _name: '${this._name}', _code: '${this._code}' }`;
   }
 
   get code() {
@@ -17,3 +17,7 @@ export default class Airport {
     return `[object ${this._code}]`;
   }
 }
+
+const airportSF = new Airport('San Francisco Airport', 'SFO');
+console.log(airportSF);
+console.log(airportSF.toString());

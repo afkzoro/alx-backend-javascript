@@ -1,10 +1,11 @@
 /* eslint-disable */
 function cleanSet(set, startString) {
-  let result = "";
-  for (const value of set) {
-    if (value.startsWith(startString)) {
-      result += `${value.slice(startString.length)}-`;
-    }
-  }
-  return result.slice(0, -1);
+ if (startString === '') {
+   return '';
+ }
+
+ const filteredValues = [...set].filter(value => value.startsWith(startString));
+ const cleanedValues = filteredValues.map(value => value.slice(startString.length));
+
+ return cleanedValues.join('-');
 }

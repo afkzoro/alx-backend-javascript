@@ -4,12 +4,11 @@ const fs = require("fs");
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, "utf8");
-    const lines = data.split("\n");
-    const students = lines.filter((line) => line.trim() !== "" && line.includes(","));
+    const lines = data.split("\n").filter((line, index) => index !== 0 && line.trim() !== "" && line.includes(","));
     const fields = new Map();
 
-    for (const student of students) {
-      const [firstname, lastname, age, field] = student.split(",");
+    for (const line of lines) {
+      const [firstname, lastname, age, field] = line.split(",");
       if (fields.has(field)) {
         fields.get(field).push(firstname);
       } else {
@@ -17,7 +16,7 @@ function countStudents(path) {
       }
     }
 
-    const numberOfStudents = students.length;
+    const numberOfStudents = lines.length;
     console.log(`Number of students: ${numberOfStudents}`);
 
     for (const [field, students] of fields.entries()) {
@@ -31,3 +30,4 @@ function countStudents(path) {
 }
 
 module.exports = countStudents;
+

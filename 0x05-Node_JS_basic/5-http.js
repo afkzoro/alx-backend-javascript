@@ -13,7 +13,7 @@ const app = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
 
-    // Replace "database.csv" with the actual path to the database file
+    
     const databasePath = "database.csv";
 
     countStudents(databasePath)

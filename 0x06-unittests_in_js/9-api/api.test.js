@@ -35,6 +35,14 @@ describe('API Tests', () => {
         done();
       });
     });
+    
+    it('should return "Payment methods for cart :id"', (done) => {
+      const cartId = 123;
+      request.get(`http://localhost:7865/cart/${cartId}`, (error, response, body) => {
+        expect(body).to.equal(`Payment methods for cart ${cartId}`);
+        done();
+      });
+    });
 
     // Add more tests for the cart page
   });

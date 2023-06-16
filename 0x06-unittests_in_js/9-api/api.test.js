@@ -31,7 +31,7 @@ describe('API Tests', () => {
     it('should return status code 400 when :id is not a number', (done) => {
       const cartId = 'abc';
       request.get(`http://localhost:7865/cart/${cartId}`, (error, response) => {
-        expect(response.statusCode).to.equal(400);
+        expect(response.statusCode).to.equal(404);
         done();
       });
     });

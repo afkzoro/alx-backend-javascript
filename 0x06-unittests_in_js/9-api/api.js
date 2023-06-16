@@ -15,7 +15,7 @@ app.listen(port, () => {
 app.get('/cart/:id', (req, res) => {
   const { id } = req.params;
   if (!/^\d+$/.test(id)) {
-    return res.status(400).send('Invalid cart ID');
+    return res.status(404).send('Invalid cart ID');
   }
   res.send(`Payment methods for cart ${id}`);
 });

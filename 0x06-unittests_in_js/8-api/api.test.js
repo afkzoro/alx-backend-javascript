@@ -1,31 +1,23 @@
 /* eslint-disable */
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const app = require('./api'); // Assuming the API code is in api.js
+const request = require('request');
+const expect = require('chai').expect;
 
-chai.use(chaiHttp);
-const expect = chai.expect;
+describe('Index Page', () => {
+  // Tests for the index page
 
-describe('API', () => {
   describe('GET /', () => {
     it('should return status code 200', (done) => {
-      chai
-        .request(app)
-        .get('/')
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          done();
-        });
+      request.get('http://localhost:7865', (error, response, body) => {
+        expect(response.statusCode).to.equal(200);
+        done();
+      });
     });
 
     it('should return the correct result', (done) => {
-      chai
-        .request(app)
-        .get('/')
-        .end((err, res) => {
-          expect(res.text).to.equal('Welcome to the payment system');
-          done();
-        });
+      request.get('http://localhost:7865', (error, response, body) => {
+        expect(body).to.equal('Welcome to the payment system');
+        done();
+      });
     });
 
     // Add more tests for any additional requirements

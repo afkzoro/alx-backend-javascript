@@ -1,8 +1,14 @@
 /* eslint-disable */
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 7865;
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to the payment system');

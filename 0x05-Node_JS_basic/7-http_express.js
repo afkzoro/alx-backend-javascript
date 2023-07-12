@@ -1,32 +1,30 @@
 /* eslint-disable */
-const express = require("express");
-const countStudents = require("./3-read_file_async");
+const express = require('express');
+
+const args = process.argv.slice(2);
+const countStudents = require('./3-read_file_async');
+
+const DATABASE = args[0];
 
 const app = express();
 const port = 1245;
 
-app.get("/", (req, res) => {
-  res.send("Hello Holberton School!\n");
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
 });
 
-app.get("/students", (req, res) => {
-
-  const databasePath = "database.csv";
-
-  countStudents(databasePath)
-    .then((output) => {
-     const responseText = `This is the list of our students:\n${output}`;
-     console.log(responseText); // Optional: Print the response to the console
-     res.send(responseText);
-    })
-    .catch((error) => {
-      console.error(error.message);
-      res.status(500).send("Internal Server Error");
-    });
+app.get('/students', async (req, res) => {
+  const msg = 'This is the list of our students\n';
+  try {
+    const students = await countStudents(DATABASE);
+    res.send(`${msg}${students.join('\n')}`);
+  } catch (error) {
+    res.send(`${msg}${error.message}`);
+  }
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log();
 });
 
 module.exports = app;

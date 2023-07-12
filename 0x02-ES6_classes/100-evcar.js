@@ -1,23 +1,16 @@
-/*eslint-disable */
-import Car from "./10-car.js";
+/* eslint-disable */
+import Car from './10-car';
+
 export default class EVCar extends Car {
- constructor(brand, motor, color, range) {
- super(brand, motor, color);
- this._range = range;
- }
- 
- get range() {
- return this._range;
- }
- 
- cloneCar() {
- const car = super.cloneCar();
- return car;
- }
- }
+  constructor(brand, motor, color, range) {
+    super(brand, motor, color);
+    this._range = range;
+  }
 
-const ec1 = new EVCar("Tesla", "Turbo", "Red", "250");
-console.log(ec1);
-
-const ec2 = ec1.cloneCar();
-console.log(ec2);
+  cloneCar() {
+    const clone = new (
+      Object.getPrototypeOf(this.constructor))(this._brand, this._motor, this._color);
+    clone._range = this._range;
+    return clone;
+  }
+}
